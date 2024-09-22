@@ -15,7 +15,7 @@ class Meteor(pygame.sprite.Sprite):
         self.rect = self.image.get_rect() #sirve para posicionar el sprite
     
     def update(self):
-        self.rect.y += 1
+        self.rect.y += 5  # velocidad de los meteoros
         if self.rect.y > 600:
             self.rect.y = -10
             self.rect.x = random.randrange(800)
@@ -46,9 +46,20 @@ class Laser(pygame.sprite.Sprite):
 
 class Game(object):
     def __init__(self):
+        #configurar reloj
+        self.clock = pygame.time.Clock()
         self.game_over = False
         # Creación de variables y listas
         self.score = 0
+        # Estados del juego
+        self.state = "menu"  # Comenzamos en el menú
+        self.game_over = False
+        # Opciones del menú
+        self.menu_options = ["Iniciar Juego", "Salir"]
+        self.selected_option = 0
+        # Configura la fuente del menu
+        self.font = pygame.font.Font(None, 36)
+        #listas
         self.meteor_list = pygame.sprite.Group()
         self.all_sprites_list = pygame.sprite.Group()
         self.laser_list = pygame.sprite.Group()
@@ -58,7 +69,7 @@ class Game(object):
         # Ocultar puntero del mouse
         pygame.mouse.set_visible(0)
         # Generar las coordenadas de los meteoros y guardarlas en listas
-        for i in range(10):
+        for i in range(5):
             self.meteor = Meteor()
             self.meteor.rect.x = random.randrange(750)
             self.meteor.rect.y = random.randrange(550)
@@ -72,11 +83,9 @@ class Game(object):
     def process_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return True
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.game_over:
-                    self.__init__() #reinicia el juego
-
+                pygame.quit()
+                sys.exit()
+            
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.player.changespeed(-3)
@@ -89,13 +98,21 @@ class Game(object):
                     self.all_sprites_list.add(self.laser)
                     self.laser_list.add(self.laser)
                     self.sound.play()
+                if event.key == pygame.K_r:
+                    if self.game_over:
+                        self.__init__() #reinicia el juego
+                        self.state = "game"
+                if event.key == pygame.K_m:
+                    if self.game_over:
+                        self.state = "menu"
+                        self.__init__() #reinicia el juego
                 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     self.player.changespeed(3)
                 if event.key == pygame.K_RIGHT:
                     self.player.changespeed(-3)
-        return False
+        return self.state
     
     def run_logic(self):
         if not self.game_over:
@@ -113,14 +130,14 @@ class Game(object):
             if len(self.meteor_list)== 0: #Condición para pasar a Game over
                 self.game_over = True
                 self.start_ticks = pygame.time.get_ticks() # tiempo hasta el game over
+        return self.game_over
 
     def display_frame(self,screen):
-
         #imagen de fondo 
         screen.blit(self.background, [0,0])
         if self.game_over:
             font = pygame.font.SysFont("serif", 35) # Fuente
-            text = font.render("Game Over, Click to continue...",True, WHITE) #Texto
+            text = font.render("Game Over, press R to restart o M to menu",True, WHITE) #Texto
             center_x = (SCREEN_WIDTH // 2) - (text.get_width() // 2) # Posición texto
             center_y = (SCREEN_HEIGHT // 2) - (text.get_height() // 2) # Posición texto
             screen.blit(text,[center_x,center_y]) # Ponerlo en pantalla
@@ -157,6 +174,30 @@ class Game(object):
             screen.blit(text,[center_x,center_y]) #Ponerlo en pantalla
 
         pygame.display.flip()
+    
+    def draw_menu(self,screen):
+        screen.fill(BLACK)
+        for index, option in enumerate(self.menu_options):
+            if index == self.selected_option:
+                text_surface = self.font.render(option, True, WHITE)  # Opción seleccionada
+            else:
+                text_surface = self.font.render(option, True, (150, 150, 150))  # Opción no seleccionada
+            screen.blit(text_surface, (SCREEN_WIDTH // 2 - text_surface.get_width() // 2, 200 + index * 100))
+
+def game_loop(game,screen):
+    global game_over
+    game_over = False
+    while not game_over:
+        #Eventos del juego
+        game.state = game.process_events() 
+        # run_logic
+        game_over = game.run_logic()
+        #dibujado del juego
+        game.display_frame(screen)
+        game.clock.tick(60)  #FPS
+        if game.state == "menu":
+            break
+
 
 def main():
     # Iniciar pygame
@@ -165,23 +206,40 @@ def main():
     size = (SCREEN_WIDTH, SCREEN_HEIGHT)
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption('Space War')
-    #configurar reloj
-    clock = pygame.time.Clock()
+    
     # Crear objeto game
     game = Game()
-    done = False
-    
-    while not done:
-        done = game.process_events() 
-        game.run_logic()
-        game.display_frame(screen)
+    running = True
+    # Bucle principal (menu)
+    while running:
+        if game.state == "menu":
+            # Procesar eventos para el menú
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_DOWN:
+                        game.selected_option = (game.selected_option + 1) % len(game.menu_options)
+                    elif event.key == pygame.K_UP:
+                        game.selected_option = (game.selected_option - 1) % len(game.menu_options)
+                    elif event.key == pygame.K_RETURN:
+                        if game.selected_option == 0:  # Iniciar juego
+                            game.state = "game"
+                        elif game.selected_option == 1:  # Salir
+                            running = False
+            # Dibujar el menú
+            game.draw_menu(screen)
+            pygame.display.flip()
+            game.clock.tick(60)
+        elif game.state == "game":
+            game_loop(game,screen)
         
-        clock.tick(60)  #FPS
     pygame.quit()
-
+    sys.exit()
 #Ejecutar la función principal (main)
 if __name__=="__main__":
     main()
+
 
 
 
