@@ -14,7 +14,6 @@ def game_loop(game,screen):
         if game.state == "menu":
             break
 
-
 def main():
     # Crear objeto game
     game = Game()
