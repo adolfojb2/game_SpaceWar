@@ -1,10 +1,8 @@
 # SPACE WAR
 
 ## Descripción
-Una breve descripción del juego. Incluye una idea general del objetivo del juego y las mecánicas principales.
+_"SPACE WAR"_ es un juego donde controlas una nave espacial que debe destrir todos los meteoritos y las naves alienigenas antes que sea destruida por ellos. Con gráficos retro y una jugabilidad desafiante, ¡pon a prueba tus habilidades!
 
-**Ejemplo**:
-_"Nombre del Juego"_ es un juego de plataformas donde controlas a un personaje que debe superar obstáculos y enemigos para alcanzar el final de cada nivel. Con gráficos retro y una jugabilidad desafiante, ¡pon a prueba tus habilidades!
 
 ## Capturas de Pantalla
 Incluye algunas imágenes o capturas de pantalla del juego en acción. Esto ayuda a los usuarios a visualizar el juego antes de descargarlo.
@@ -18,7 +16,6 @@ Especifica las dependencias y requisitos del sistema necesarios para ejecutar el
 - **Python**: 3.x
 - **Bibliotecas adicionales**:
   - `pygame`
-  - Otras bibliotecas (si es necesario)
 
 ## Instalación
 
