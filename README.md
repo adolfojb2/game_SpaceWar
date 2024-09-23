@@ -9,9 +9,9 @@ El objetivo del juego es eliminar todos los meteoros y aliens en el menor tiempo
 
 ## Capturas de Pantalla
 
-![Menú del juego](./cap_menu.png)
+![Menú del juego](./cap_menu.png)<br>
 
-![Captura del Juego](./cap_game.png)
+![Captura del Juego](./cap_game.png)<br>
 
 ## Requisitos del Sistema
 
@@ -34,9 +34,9 @@ El objetivo del juego es eliminar todos los meteoros y aliens en el menor tiempo
 ## Cómo Jugar
 Debes conducir la nave espacial por el espacio y disparar a los meteoros y aliens para eliminarlos y acumular la mayor cantidad de puntos, debes evitar chocar con los aliens porque ellos destruyen la nave.
 
-puntos por eliminar un meteoro = + 1 punto.
-puntos por eliminar un alien = + 3 puntos.
-Si un alien colisiona con la nave = game over.
+puntos por eliminar un meteoro = + 1 punto.<br>
+puntos por eliminar un alien = + 3 puntos.<br>
+Si un alien colisiona con la nave = game over.<br>
 
 
 ### Controles:
