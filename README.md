@@ -9,9 +9,9 @@ El objetivo del juego es eliminar todos los meteoros y aliens en el menor tiempo
 
 ## Capturas de Pantalla
 
-![Menú del juego](cap_menu.png)
+![Menú del juego](./cap_menu.png)
 
-![Captura del Juego](cap_game.png)
+![Captura del Juego](./cap_game.png)
 
 ## Requisitos del Sistema
 
