@@ -4,6 +4,7 @@ import pygame , sys, random
 BLACK = (0,0,0)
 GRAY = (100, 100, 100)
 WHITE = (255,255,255)
+YELLOW = (255, 255, 0)
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -79,7 +80,7 @@ class Game(object):
         self.menu_options = ["Iniciar Juego", "Salir"]
         self.selected_option = 0
         # Configura la fuente del menu
-        self.font = pygame.font.Font(None, 36)
+        self.font = pygame.font.Font(None, 76)
         #listas
         self.meteor_list = pygame.sprite.Group()
         self.alien_list = pygame.sprite.Group()
@@ -217,10 +218,12 @@ class Game(object):
         pygame.display.flip()
     
     def draw_menu(self,screen):
-        screen.fill(BLACK)
+        #screen.fill(BLACK)
+        self.bg_menu = pygame.image.load("bg_menu.jpg").convert() 
+        screen.blit(self.bg_menu, [0,0])
         for index, option in enumerate(self.menu_options):
             if index == self.selected_option:
-                text_surface = self.font.render(option, True, WHITE)  # Opción seleccionada
+                text_surface = self.font.render(option, True, YELLOW)  # Opción seleccionada
             else:
                 text_surface = self.font.render(option, True, (150, 150, 150))  # Opción no seleccionada
             screen.blit(text_surface, (SCREEN_WIDTH // 2 - text_surface.get_width() // 2, 200 + index * 100))
