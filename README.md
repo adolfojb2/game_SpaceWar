@@ -8,10 +8,9 @@ _"SPACE WAR"_ es un juego donde controlas una nave espacial que debe destrir tod
 El objetivo del juego es eliminar todos los meteoros y aliens en el menor tiempo posible y sin que te elimine un alien.
 
 ## Capturas de Pantalla
+<img src="cap_menu.png" alt="Imagen 1" width="300"/>  
 
-![Menú del juego](./cap_menu.png)<br>
-
-![Captura del Juego](./cap_game.png)<br>
+<img src="cap_game.png" alt="Imagen 2" width="300"/>  
 
 ## Requisitos del Sistema
 
