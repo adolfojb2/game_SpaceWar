@@ -10,10 +10,10 @@ El objetivo del juego es eliminar todos los meteoros y aliens en el menor tiempo
 ## Capturas de Pantalla
 
 ![Menú del juego](cap_menu.png)
+
 ![Captura del Juego](cap_game.png)
 
 ## Requisitos del Sistema
-Especifica las dependencias y requisitos del sistema necesarios para ejecutar el juego.
 
 - **Sistema Operativo**: Windows, macOS, Linux
 - **Python**: 3.9.5
@@ -22,32 +22,21 @@ Especifica las dependencias y requisitos del sistema necesarios para ejecutar el
 
 ## Instalación
 
-Proporciona instrucciones claras sobre cómo instalar el juego. Asegúrate de incluir pasos detallados para los usuarios menos técnicos.
-
 1. Clonar este repositorio:
     ```bash
-    git clone https://github.com/usuario/repo-del-juego.git
+    git clone https://github.com/adolfojb2/game_SpaceWar.git
     ```
-2. Navegar al directorio del proyecto:
+2. Ejecutar el archivo main.py:
     ```bash
-    cd repo-del-juego
-    ```
-3. Crear y activar un entorno virtual (opcional pero recomendado):
-    ```bash
-    python -m venv env
-    source env/bin/activate  # En Windows: env\Scripts\activate
-    ```
-4. Instalar las dependencias:
-    ```bash
-    pip install -r requirements.txt
+    python main.py
     ```
 
 ## Cómo Jugar
 Debes conducir la nave espacial por el espacio y disparar a los meteoros y aliens para eliminarlos y acumular la mayor cantidad de puntos, debes evitar chocar con los aliens porque ellos destruyen la nave.
 
-puntos por eliminar un meteoro = + 1 punto
-puntos por eliminar un alien = + 3 puntos
-Si un alien colisiona con la nave = game over
+puntos por eliminar un meteoro = + 1 punto.
+puntos por eliminar un alien = + 3 puntos.
+Si un alien colisiona con la nave = game over.
 
 
 ### Controles:
